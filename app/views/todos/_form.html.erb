@@ -1,7 +1,9 @@
-<%= form_with model: todo, id: "#{dom_id(todo)}_form", html: { class: "h-[38px]" } do |f| %>
+<%= form_with model: todo, id: "#{dom_id(todo)}_form" do |f| %>
   <div class="flex items-stretch flex-grow">
     <%= f.text_field :name, class: class_names("block w-full rounded-none rounded-l-md sm:text-sm", "border-red-500 focus:outline-none": todo.errors.any?, "border-gray-300": todo.errors.empty?), placeholder: "Add a new todo..." %>
     <%= f.submit class: "-ml-px relative px-4 py-2 border border-blue-600 text-sm font-medium rounded-r-md text-white bg-blue-600 hover:bg-blue-700" %>
   </div>
-  <small class="text-red-500 ml-1"><%= show_errors(todo, :name) %></small>
+  <% if todo.errors.any? %>
+    <small class="text-red-500 ml-1"><%= show_errors(todo, :name) %></small>
+  <% end %>
 <% end %>
